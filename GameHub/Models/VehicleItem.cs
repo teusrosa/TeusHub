@@ -1,9 +1,11 @@
+using System.Text.Json;
+
 namespace GameHub.Models;
 //gta
 public class VehicleItem : GameItem
 {
     public string Name { get; set; } = "";
-    public Dictionary<string, string?>? DisplayName { get; set; }
+    public Dictionary<string, JsonElement>? DisplayName { get; set; }
     public string? Manufacturer { get; set; }
     public string? Class { get; set; }
     public string? DlcName { get; set; }
@@ -17,7 +19,8 @@ public class VehicleItem : GameItem
         get
         {
             string? english = null;
-            DisplayName?.TryGetValue("English", out english);
+            if (DisplayName?.TryGetValue("English", out var value) == true && value.ValueKind == JsonValueKind.String)
+                english = value.GetString();
             return string.IsNullOrWhiteSpace(english) || english == "NULL" ? Name : english;
         }
     }

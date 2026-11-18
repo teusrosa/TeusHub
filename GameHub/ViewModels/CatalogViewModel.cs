@@ -5,7 +5,6 @@ using GameHub.Services;
 
 namespace GameHub.ViewModels;
 
-//parte de visualização do catalogo de cada jogo
 public abstract class CatalogViewModel : BaseViewModel
 {
     private readonly ICatalogService _service;
@@ -23,8 +22,9 @@ public abstract class CatalogViewModel : BaseViewModel
         SearchCommand = new Command(async () => await LoadAsync());
         OpenItemCommand = new Command<GameItem>(async item =>
         {
-            if (item is not null) await _nav.GoToItemDetailAsync(item); // PILHA
+            if (item is not null) await _nav.GoToItemDetailAsync(item);
         });
+        BackCommand = new Command(async () => await _nav.GoToHomeAsync());
     }
 
     public GameDefinition Game => _service.Game;
@@ -44,6 +44,7 @@ public abstract class CatalogViewModel : BaseViewModel
 
     public ICommand SearchCommand { get; }
     public ICommand OpenItemCommand { get; }
+    public ICommand BackCommand { get; }
 
     public async Task EnsureLoadedAsync()
     {

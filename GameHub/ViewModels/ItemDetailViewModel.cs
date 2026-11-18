@@ -22,6 +22,7 @@ public class ItemDetailViewModel : BaseViewModel, IQueryAttributable
         {
             if (Item is not null) await _nav.GoToGameInfoAsync(Item.Game);
         });
+        BackCommand = new Command(async () => await _nav.GoBackAsync());
     }
 
     public GameItem? Item
@@ -42,6 +43,7 @@ public class ItemDetailViewModel : BaseViewModel, IQueryAttributable
 
     public ICommand ToggleFavoriteCommand { get; }
     public ICommand OpenGameInfoCommand { get; }
+    public ICommand BackCommand { get; }
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
