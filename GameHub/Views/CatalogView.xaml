@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GameHub.Views.CatalogView">
+
+    <!-- Layout reaproveitado pelas 3 abas de jogos (o BindingContext vem da página) -->
+    <Grid RowDefinitions="Auto,Auto,*">
+        <SearchBar Placeholder="{Binding SearchPlaceholder}"
+                   Text="{Binding SearchText}"
+                   SearchCommand="{Binding SearchCommand}" />
+
+        <Label Grid.Row="1" Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}"
+               TextColor="Red" Margin="16,4" />
+
+        <Grid Grid.Row="2">
+            <CollectionView x:Name="List"
+                            ItemsSource="{Binding Items}"
+                            ItemTemplate="{StaticResource GameItemTemplate}"
+                            SelectionMode="Single"
+                            SelectionChanged="OnSelectionChanged">
+                <CollectionView.EmptyView>
+                    <Label Text="Nenhum item encontrado." HorizontalOptions="Center"
+                           VerticalOptions="Center" TextColor="Gray" />
+                </CollectionView.EmptyView>
+            </CollectionView>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+        </Grid>
+    </Grid>
+</ContentView>

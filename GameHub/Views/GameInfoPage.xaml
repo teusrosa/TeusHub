@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GameHub.Views.GameInfoPage"
+             Title="{Binding Title}">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="16" Spacing="12">
+
+                <Label Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}" TextColor="Red" />
+
+                <VerticalStackLayout Spacing="12" IsVisible="{Binding HasInfo}">
+                    <Image Source="{Binding Info.BackgroundImage}" HeightRequest="180" Aspect="AspectFill" />
+                    <Label Text="{Binding Info.Name}" FontSize="24" FontAttributes="Bold" />
+
+                    <Border Style="{StaticResource Card}">
+                        <VerticalStackLayout Spacing="8"
+                                             BindableLayout.ItemsSource="{Binding Info.Rows}"
+                                             BindableLayout.ItemTemplate="{StaticResource DetailRowTemplate}" />
+                    </Border>
+
+                    <Label Text="{Binding Info.Description}" MaxLines="12" LineBreakMode="TailTruncation" />
+                </VerticalStackLayout>
+
+                <Button Text="{Binding CatalogButtonText}" Command="{Binding OpenCatalogCommand}" />
+                <Button Text="🏠 Ir para o Início (menu lateral)" Command="{Binding OpenHomeCommand}" />
+                <Button Text="⬅ Voltar (pilha)" Command="{Binding BackCommand}" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+    </Grid>
+</ContentPage>

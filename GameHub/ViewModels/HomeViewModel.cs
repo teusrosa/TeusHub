@@ -1,0 +1,47 @@
+using System.Collections.Specialized;
+using System.Windows.Input;
+using GameHub.Models;
+using GameHub.Services;
+
+namespace GameHub.ViewModels;
+
+/// <summary>Cartão de jogo da tela inicial: sabe qual jogo é e como abrir a aba dele.</summary>
+public class GameCard
+{
+    public GameCard(GameDefinition game, ICommand openCommand)
+    {
+        Game = game;
+        OpenCommand = openCommand;
+    }
+
+    public GameDefinition Game { get; }
+    public ICommand OpenCommand { get; }
+}
+
+public class HomeViewModel : BaseViewModel
+{
+    private readonly FavoritesService _favorites;
+
+    public HomeViewModel(INavigationService nav, FavoritesService favorites)
+    {
+        _favorites = favorites;
+        Title = "GameHub";
+
+        Games = GameDefinitions.All
+            .Select(g => new GameCard(g, new Command(async () => await nav.GoToGameTabAsync(g)))) // RODAPÉ
+            .ToList();
+
+        OpenFlyoutCommand = new Command(nav.OpenFlyout);                                           // MENU LATERAL
+        OpenFavoritesCommand = new Command(async () => await nav.GoToFavoritesAsync());            // RODAPÉ
+
+        _favorites.Items.CollectionChanged += OnFavoritesChanged;
+    }
+
+    public IReadOnlyList<GameCard> Games { get; }
+    public ICommand OpenFlyoutCommand { get; }
+    public ICommand OpenFavoritesCommand { get; }
+    public int FavoritesCount => _favorites.Items.Count;
+
+    private void OnFavoritesChanged(object? sender, NotifyCollectionChangedEventArgs e) =>
+        OnPropertyChanged(nameof(FavoritesCount));
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GameHub.Views.FavoritesPage"
+             Title="Favoritos">
+    <Grid RowDefinitions="Auto,*">
+        <Button Text="🗑 Limpar favoritos" Command="{Binding ClearCommand}"
+                IsVisible="{Binding HasItems}" Margin="12" />
+
+        <CollectionView x:Name="List" Grid.Row="1"
+                        ItemsSource="{Binding Items}"
+                        ItemTemplate="{StaticResource GameItemTemplate}"
+                        SelectionMode="Single"
+                        SelectionChanged="OnSelectionChanged">
+            <CollectionView.EmptyView>
+                <Label Text="Você ainda não favoritou nada. Abra um item e toque em 'Favoritar'."
+                       HorizontalOptions="Center" VerticalOptions="Center"
+                       HorizontalTextAlignment="Center" TextColor="Gray" Margin="24" />
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </Grid>
+</ContentPage>

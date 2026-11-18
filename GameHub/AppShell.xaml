@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:GameHub.Views"
+       x:Class="GameHub.AppShell"
+       Title="GameHub"
+       FlyoutBehavior="Flyout"
+       Shell.BackgroundColor="{StaticResource Primary}"
+       Shell.ForegroundColor="White"
+       Shell.TitleColor="White"
+       Shell.TabBarBackgroundColor="{StaticResource Primary}"
+       Shell.TabBarForegroundColor="White"
+       Shell.TabBarTitleColor="White"
+       Shell.TabBarUnselectedColor="{StaticResource PrimaryLight}">
+
+    <!-- ========== MODO 1: MENU LATERAL (Flyout) ========== -->
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="{StaticResource Primary}" HeightRequest="120" Padding="20">
+            <VerticalStackLayout VerticalOptions="End">
+                <Label Text="🎮 GameHub" TextColor="White" FontSize="26" FontAttributes="Bold" />
+                <Label Text="GTA V • Fortnite • CS2" TextColor="White" FontSize="13" />
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="🏠 Início" Route="home">
+        <ShellContent ContentTemplate="{DataTemplate views:HomePage}" />
+    </FlyoutItem>
+
+    <!-- ========== MODO 2: RODAPÉ (TabBar) ==========
+         Um FlyoutItem com várias ShellContent vira uma barra de abas.
+         A aba "Favoritos" é compartilhada pelos 3 jogos. -->
+    <FlyoutItem Title="🕹️ Jogos" Route="games">
+        <ShellContent Title="🚗 GTA V" Route="gta" ContentTemplate="{DataTemplate views:GtaPage}" />
+        <ShellContent Title="🪂 Fortnite" Route="fortnite" ContentTemplate="{DataTemplate views:FortnitePage}" />
+        <ShellContent Title="🔫 CS2" Route="cs2" ContentTemplate="{DataTemplate views:Cs2Page}" />
+        <ShellContent Title="⭐ Favoritos" Route="favorites" ContentTemplate="{DataTemplate views:FavoritesPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="ℹ️ Sobre" Route="about">
+        <ShellContent ContentTemplate="{DataTemplate views:AboutPage}" />
+    </FlyoutItem>
+
+    <!-- Atalho no menu lateral que leva para uma aba do rodapé -->
+    <MenuItem Text="⭐ Meus favoritos" Clicked="OnFavoritesClicked" />
+
+    <!-- ========== MODO 3: PILHA (Stack) ==========
+         As rotas "itemdetail" e "gameinfo" são registradas em MauiProgram.cs
+         e empilhadas com GoToAsync (ver ShellNavigationService). -->
+</Shell>
