@@ -1,6 +1,5 @@
 namespace GameHub.Models;
-
-/// <summary>Informações gerais do jogo vindas da API RAWG (a API que liga os 3 jogos).</summary>
+//usada info do jogo, tipo jogo/nota
 public class GameInfo
 {
     public string Name { get; init; } = "";

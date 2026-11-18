@@ -4,10 +4,7 @@ using GameHub.Services;
 
 namespace GameHub.ViewModels;
 
-/// <summary>
-/// Segunda tela da PILHA: dados da API RAWG sobre o jogo do item aberto.
-/// Daqui o usuário pode ir para a aba do jogo (RODAPÉ) ou voltar (PILHA).
-/// </summary>
+//aba do jogo escolhidp
 public class GameInfoViewModel : BaseViewModel, IQueryAttributable
 {
     private readonly IGameInfoService _service;

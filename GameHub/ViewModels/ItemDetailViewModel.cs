@@ -4,8 +4,7 @@ using GameHub.Models;
 using GameHub.Services;
 
 namespace GameHub.ViewModels;
-
-/// <summary>Tela de detalhe empilhada (PILHA). Funciona para qualquer GameItem.</summary>
+//detalhes do item escolhido
 public class ItemDetailViewModel : BaseViewModel, IQueryAttributable
 {
     private readonly FavoritesService _favorites;
@@ -21,7 +20,7 @@ public class ItemDetailViewModel : BaseViewModel, IQueryAttributable
         ToggleFavoriteCommand = new Command(ToggleFavorite);
         OpenGameInfoCommand = new Command(async () =>
         {
-            if (Item is not null) await _nav.GoToGameInfoAsync(Item.Game); // empilha outra página
+            if (Item is not null) await _nav.GoToGameInfoAsync(Item.Game);
         });
     }
 

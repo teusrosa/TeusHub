@@ -1,8 +1,7 @@
 using GameHub.Models;
 
 namespace GameHub.Services;
-
-/// <summary>API 1: GTA V Data Dumps (vehicles.json)</summary>
+//info da api do gta
 public class GtaCatalogService : CachedFileCatalogService<VehicleItem>
 {
     public override GameDefinition Game => GameDefinitions.GtaV;

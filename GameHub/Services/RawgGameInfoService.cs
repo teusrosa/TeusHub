@@ -3,11 +3,7 @@ using System.Text.Json.Serialization;
 using GameHub.Models;
 
 namespace GameHub.Services;
-
-/// <summary>
-/// API de LIGAÇÃO: RAWG Video Games Database. Ela conhece GTA V, Fortnite e CS2,
-/// então une as 3 APIs do trabalho em uma única tela de informações do jogo.
-/// </summary>
+//info da api do rawg
 public class RawgGameInfoService : IGameInfoService
 {
     private static readonly HttpClient Http = new() { Timeout = TimeSpan.FromSeconds(30) };
@@ -17,7 +13,7 @@ public class RawgGameInfoService : IGameInfoService
     {
         if (!AppConfig.HasRawgKey)
             throw new InvalidOperationException(
-                "Informe sua chave da RAWG em Constants.cs (AppConfig.RawgApiKey). É grátis em rawg.io/apidocs.");
+                "Criar sua key na Api do Rawg");
 
         if (_cache.TryGetValue(game.Id, out var cached))
             return cached;
@@ -55,7 +51,6 @@ public class RawgGameInfoService : IGameInfoService
     private static List<string> Names(List<RawgNamed> list) =>
         list.Select(n => n.Name).Where(n => !string.IsNullOrEmpty(n)).Select(n => n!).ToList();
 
-    // ----- DTOs do JSON da RAWG (snake_case) -----
     private class RawgSearch
     {
         [JsonPropertyName("results")] public List<RawgGame> Results { get; set; } = new();

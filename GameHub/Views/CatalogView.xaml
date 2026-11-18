@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GameHub.Views.CatalogView">
 
-    <!-- Layout reaproveitado pelas 3 abas de jogos (o BindingContext vem da página) -->
     <Grid RowDefinitions="Auto,Auto,*">
         <SearchBar Placeholder="{Binding SearchPlaceholder}"
                    Text="{Binding SearchText}"

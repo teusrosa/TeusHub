@@ -13,7 +13,6 @@
        Shell.TabBarTitleColor="White"
        Shell.TabBarUnselectedColor="{StaticResource PrimaryLight}">
 
-    <!-- ========== MODO 1: MENU LATERAL (Flyout) ========== -->
     <Shell.FlyoutHeader>
         <Grid BackgroundColor="{StaticResource Primary}" HeightRequest="120" Padding="20">
             <VerticalStackLayout VerticalOptions="End">
@@ -27,9 +26,6 @@
         <ShellContent ContentTemplate="{DataTemplate views:HomePage}" />
     </FlyoutItem>
 
-    <!-- ========== MODO 2: RODAPÉ (TabBar) ==========
-         Um FlyoutItem com várias ShellContent vira uma barra de abas.
-         A aba "Favoritos" é compartilhada pelos 3 jogos. -->
     <FlyoutItem Title="🕹️ Jogos" Route="games">
         <ShellContent Title="🚗 GTA V" Route="gta" ContentTemplate="{DataTemplate views:GtaPage}" />
         <ShellContent Title="🪂 Fortnite" Route="fortnite" ContentTemplate="{DataTemplate views:FortnitePage}" />
@@ -37,14 +33,6 @@
         <ShellContent Title="⭐ Favoritos" Route="favorites" ContentTemplate="{DataTemplate views:FavoritesPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="ℹ️ Sobre" Route="about">
-        <ShellContent ContentTemplate="{DataTemplate views:AboutPage}" />
-    </FlyoutItem>
-
-    <!-- Atalho no menu lateral que leva para uma aba do rodapé -->
     <MenuItem Text="⭐ Meus favoritos" Clicked="OnFavoritesClicked" />
 
-    <!-- ========== MODO 3: PILHA (Stack) ==========
-         As rotas "itemdetail" e "gameinfo" são registradas em MauiProgram.cs
-         e empilhadas com GoToAsync (ver ShellNavigationService). -->
 </Shell>

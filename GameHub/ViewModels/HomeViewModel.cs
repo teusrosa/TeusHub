@@ -5,7 +5,7 @@ using GameHub.Services;
 
 namespace GameHub.ViewModels;
 
-/// <summary>Cartão de jogo da tela inicial: sabe qual jogo é e como abrir a aba dele.</summary>
+//aqui vai abrir uma aba do jogo escolhido
 public class GameCard
 {
     public GameCard(GameDefinition game, ICommand openCommand)

@@ -23,7 +23,6 @@
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#1F1F26}" />
             </Style>
 
-            <!-- Item de lista usado nas 3 abas de jogos e nos Favoritos (funciona com qualquer GameItem) -->
             <DataTemplate x:Key="GameItemTemplate">
                 <Border Style="{StaticResource Card}" Margin="12,6">
                     <Grid ColumnDefinitions="64,*,Auto" ColumnSpacing="12">
@@ -43,7 +42,6 @@
                 </Border>
             </DataTemplate>
 
-            <!-- Linha "rótulo / valor" das telas de detalhe -->
             <DataTemplate x:Key="DetailRowTemplate">
                 <Grid ColumnDefinitions="*,2*" ColumnSpacing="8">
                     <Label Text="{Binding Label}" TextColor="Gray" />

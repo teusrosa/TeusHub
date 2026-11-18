@@ -1,6 +1,5 @@
 namespace GameHub.Models;
-
-/// <summary>Veículo do GTA V (vehicles.json do GTA V Data Dumps).</summary>
+//gta
 public class VehicleItem : GameItem
 {
     public string Name { get; set; } = "";

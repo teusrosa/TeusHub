@@ -5,10 +5,7 @@ using GameHub.Services;
 
 namespace GameHub.ViewModels;
 
-/// <summary>
-/// ViewModel base das 3 listas (abas do rodapé). Cada jogo herda desta classe;
-/// o que muda é só o serviço (API) injetado.
-/// </summary>
+//parte de visualização do catalogo de cada jogo
 public abstract class CatalogViewModel : BaseViewModel
 {
     private readonly ICatalogService _service;

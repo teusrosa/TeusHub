@@ -5,7 +5,7 @@ using GameHub.Models;
 using GameHub.Services;
 
 namespace GameHub.ViewModels;
-
+//ver favoritos
 public class FavoritesViewModel : BaseViewModel
 {
     private readonly FavoritesService _favorites;

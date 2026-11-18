@@ -3,17 +3,16 @@ using System.Net.Http.Json;
 using GameHub.Models;
 
 namespace GameHub.Services;
-
+//info da api do fortnite
 public class ApiResponse<T>
 {
     public int Status { get; set; }
     public T? Data { get; set; }
 }
 
-/// <summary>API 2: Fortnite-API (busca de cosméticos do Battle Royale).</summary>
 public class FortniteCatalogService : CatalogServiceBase
 {
-    private const string DefaultTerm = "skull"; // termo inicial para a lista não começar vazia
+    private const string DefaultTerm = "skull";
 
     public override GameDefinition Game => GameDefinitions.Fortnite;
 
@@ -25,7 +24,7 @@ public class FortniteCatalogService : CatalogServiceBase
 
         using var resp = await Http.GetAsync(url, ct);
         if (resp.StatusCode == HttpStatusCode.NotFound)
-            return Array.Empty<GameItem>(); // a API responde 404 quando nada é encontrado
+            return Array.Empty<GameItem>();
 
         resp.EnsureSuccessStatusCode();
         var body = await resp.Content.ReadFromJsonAsync<ApiResponse<List<CosmeticItem>>>(JsonOptions, ct);

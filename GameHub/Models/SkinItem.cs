@@ -13,7 +13,7 @@ public class RarityRef : NamedRef
     public string? Color { get; set; }
 }
 
-/// <summary>Skin de arma do CS2 (skins.json da CSGO-API do ByMykel).</summary>
+//cs
 public class SkinItem : GameItem
 {
     public string Id { get; set; } = "";

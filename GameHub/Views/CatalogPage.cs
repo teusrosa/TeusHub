@@ -2,10 +2,6 @@ using GameHub.ViewModels;
 
 namespace GameHub.Views;
 
-/// <summary>
-/// Página base das 3 abas do rodapé (herança): monta o CatalogView e carrega os dados.
-/// GtaPage, FortnitePage e Cs2Page só passam o ViewModel do seu jogo.
-/// </summary>
 public abstract class CatalogPage : ContentPage
 {
     private readonly CatalogViewModel _viewModel;

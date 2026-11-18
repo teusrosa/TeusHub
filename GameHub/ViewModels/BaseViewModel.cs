@@ -3,7 +3,6 @@ using System.Runtime.CompilerServices;
 
 namespace GameHub.ViewModels;
 
-/// <summary>Base de todos os ViewModels: notificação de mudança, título, "ocupado" e erro.</summary>
 public abstract class BaseViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;

@@ -1,6 +1,5 @@
 namespace GameHub.Models;
-
-/// <summary>Dados gravados no aparelho para um favorito.</summary>
+//favoritar item
 public class FavoriteRecord
 {
     public string GameId { get; set; } = "";
@@ -12,10 +11,6 @@ public class FavoriteRecord
     public List<DetailRow> Details { get; set; } = new();
 }
 
-/// <summary>
-/// Favorito: também é um GameItem, então as mesmas telas (lista e detalhe)
-/// mostram veículos, skins e cosméticos favoritados sem saber de qual jogo vieram.
-/// </summary>
 public class FavoriteItem : GameItem
 {
     private readonly FavoriteRecord _record;

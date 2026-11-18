@@ -35,7 +35,6 @@ public static class MauiProgram
         builder.Services.AddTransient<FortnitePage>();
         builder.Services.AddTransient<Cs2Page>();
         builder.Services.AddTransient<FavoritesPage>();
-        builder.Services.AddTransient<AboutPage>();
         builder.Services.AddTransient<ItemDetailPage>();
         builder.Services.AddTransient<GameInfoPage>();
 

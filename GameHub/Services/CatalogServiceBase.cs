@@ -4,7 +4,6 @@ using Microsoft.Maui.Storage;
 
 namespace GameHub.Services;
 
-/// <summary>Classe base: HttpClient, opções do JSON e download com cache em disco.</summary>
 public abstract class CatalogServiceBase : ICatalogService
 {
     protected static readonly HttpClient Http = CreateHttp();
@@ -20,7 +19,6 @@ public abstract class CatalogServiceBase : ICatalogService
         return http;
     }
 
-    /// <summary>Baixa o JSON uma única vez (arquivos grandes) e depois lê do cache.</summary>
     protected static async Task<List<T>> GetListCachedAsync<T>(string url, string fileName, CancellationToken ct)
     {
         var path = Path.Combine(FileSystem.CacheDirectory, fileName);
@@ -44,16 +42,12 @@ public abstract class CatalogServiceBase : ICatalogService
         }
         catch (JsonException)
         {
-            File.Delete(path); // cache corrompido: baixa de novo na próxima vez
+            File.Delete(path);
             throw;
         }
     }
 }
 
-/// <summary>
-/// Template Method: GTA e CS2 baixam um JSON grande, guardam em cache e filtram em memória.
-/// As subclasses só dizem a URL, o nome do arquivo e como filtrar.
-/// </summary>
 public abstract class CachedFileCatalogService<T> : CatalogServiceBase where T : GameItem
 {
     private List<T>? _all;

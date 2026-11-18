@@ -1,5 +1,5 @@
 namespace GameHub.Models;
-
+//fortnite
 public class ValueInfo
 {
     public string? Value { get; set; }
@@ -17,7 +17,6 @@ public class CosmeticImages
     public string? Icon { get; set; }
 }
 
-/// <summary>Cosmético do Fortnite (Fortnite-API /v2/cosmetics/br/search/all).</summary>
 public class CosmeticItem : GameItem
 {
     public string Id { get; set; } = "";

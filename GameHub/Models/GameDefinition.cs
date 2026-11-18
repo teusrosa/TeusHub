@@ -1,9 +1,7 @@
 namespace GameHub.Models;
-
-/// <summary>Descreve um jogo do app e liga as 3 APIs de dados à API RAWG (nome usado na busca).</summary>
+//info de cada jogo
 public sealed record GameDefinition(string Id, string DisplayName, string RawgSearchName, string Emoji, string Description)
 {
-    /// <summary>Rota da aba (rodapé) deste jogo no Shell.</summary>
     public string Route => Id;
 }
 
