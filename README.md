@@ -1,4 +1,4 @@
-# GameHub (.NET MAUI)
+# TeusHub 
 
 Uso de 3 APIs de jogos + 1 API que relaciona com elas (RAWG)
 | GTA V Data Dumps | GTA V | lista de veículos (`vehicles.json`) |
