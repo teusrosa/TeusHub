@@ -4,11 +4,11 @@
              x:Class="GameHub.Views.CatalogView">
 
     <Grid RowDefinitions="Auto,Auto,Auto,*">
-        <Button Text="⬅ Voltar" Command="{Binding BackCommand}" HorizontalOptions="Start" />
+        <Button Text="⬅ Voltar" Clicked="OnBackClicked" HorizontalOptions="Start" />
 
         <SearchBar Placeholder="{Binding SearchPlaceholder}"
                    Text="{Binding SearchText}"
-                   SearchCommand="{Binding SearchCommand}"
+                   SearchButtonPressed="OnSearchButtonPressed"
                    Grid.Row="1" />
 
         <Label Grid.Row="2" Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}"

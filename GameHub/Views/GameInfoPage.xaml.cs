@@ -9,4 +9,22 @@ public partial class GameInfoPage : ContentPage
         InitializeComponent();
         BindingContext = viewModel;
     }
+
+    private async void OnOpenCatalogClicked(object? sender, EventArgs e)
+    {
+        if (BindingContext is InformacoesJogoViewModel viewModel)
+            await viewModel.OpenCatalogAsync();
+    }
+
+    private async void OnOpenHomeClicked(object? sender, EventArgs e)
+    {
+        if (BindingContext is InformacoesJogoViewModel viewModel)
+            await viewModel.OpenHomeAsync();
+    }
+
+    private async void OnBackClicked(object? sender, EventArgs e)
+    {
+        if (BindingContext is InformacoesJogoViewModel viewModel)
+            await viewModel.GoBackAsync();
+    }
 }

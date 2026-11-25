@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using GameHub.Models;
 using GameHub.Services;
 
@@ -19,12 +18,6 @@ public abstract class CatalogoViewModel : ModeloBaseViewModel
         _nav = nav;
         Title = service.Game.DisplayName;
 
-        SearchCommand = new Command(async () => await LoadAsync());
-        OpenItemCommand = new Command<ItemJogo>(async item =>
-        {
-            if (item is not null) await _nav.GoToItemDetailAsync(item);
-        });
-        BackCommand = new Command(async () => await _nav.GoToHomeAsync());
     }
 
     public DefinicaoJogo Game => _service.Game;
@@ -42,9 +35,9 @@ public abstract class CatalogoViewModel : ModeloBaseViewModel
         set => SetProperty(ref _searchText, value);
     }
 
-    public ICommand SearchCommand { get; }
-    public ICommand OpenItemCommand { get; }
-    public ICommand BackCommand { get; }
+    public Task OpenItemAsync(ItemJogo item) => _nav.GoToItemDetailAsync(item);
+
+    public Task GoBackAsync() => _nav.GoToHomeAsync();
 
     public async Task EnsureLoadedAsync()
     {

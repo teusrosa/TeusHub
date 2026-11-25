@@ -4,7 +4,7 @@
              x:Class="GameHub.Views.FavoritesPage"
              Title="Favoritos">
     <Grid RowDefinitions="Auto,*">
-        <Button Text="🗑 Limpar favoritos" Command="{Binding ClearCommand}"
+        <Button Text="🗑 Limpar favoritos" Clicked="OnClearClicked"
                 IsVisible="{Binding HasItems}" Margin="12" />
 
         <CollectionView x:Name="List" Grid.Row="1"

@@ -1,6 +1,5 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Windows.Input;
 using GameHub.Models;
 using GameHub.Services;
 
@@ -9,17 +8,13 @@ namespace GameHub.ViewModels;
 public class FavoritosViewModel : ModeloBaseViewModel
 {
     private readonly FavoritesService _favorites;
+    private readonly INavigationService _nav;
 
     public FavoritosViewModel(FavoritesService favorites, INavigationService nav)
     {
         _favorites = favorites;
+        _nav = nav;
         Title = "Favoritos";
-
-        OpenItemCommand = new Command<ItemJogo>(async item =>
-        {
-            if (item is not null) await nav.GoToItemDetailAsync(item); // PILHA
-        });
-        ClearCommand = new Command(_favorites.Clear);
 
         _favorites.Items.CollectionChanged += OnChanged;
     }
@@ -28,8 +23,9 @@ public class FavoritosViewModel : ModeloBaseViewModel
     public bool IsEmpty => Items.Count == 0;
     public bool HasItems => Items.Count > 0;
 
-    public ICommand OpenItemCommand { get; }
-    public ICommand ClearCommand { get; }
+    public Task OpenItemAsync(ItemJogo item) => _nav.GoToItemDetailAsync(item);
+
+    public void Clear() => _favorites.Clear();
 
     private void OnChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {

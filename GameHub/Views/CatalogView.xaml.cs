@@ -10,10 +10,22 @@ public partial class CatalogView : ContentView
         InitializeComponent();
     }
 
-    private void OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    private async void OnBackClicked(object? sender, EventArgs e)
+    {
+        if (BindingContext is CatalogoViewModel viewModel)
+            await viewModel.GoBackAsync();
+    }
+
+    private async void OnSearchButtonPressed(object? sender, EventArgs e)
+    {
+        if (BindingContext is CatalogoViewModel viewModel)
+            await viewModel.LoadAsync();
+    }
+
+    private async void OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is ItemJogo item && BindingContext is CatalogoViewModel vm)
-            vm.OpenItemCommand.Execute(item);
+            await vm.OpenItemAsync(item);
 
         if (sender is CollectionView list)
             list.SelectedItem = null; // permite tocar no mesmo item de novo

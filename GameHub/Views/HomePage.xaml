@@ -3,38 +3,48 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GameHub.Views.HomePage"
              Title="Início">
-    <ScrollView>
-        <VerticalStackLayout Padding="16" Spacing="14">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="16,72,16,16" Spacing="14">
+                <Label Text="Bem-vindo ao TeusHUB-Games" FontSize="26" FontAttributes="Bold" />
+                <Label Text="Aqui você pode explorar veículos do GTA V, skins do Fortnite e armas do CS2. Todos os jogos são ligados pela API RAWG."
+                       TextColor="Gray" />
 
-            <Label Text="Bem-vindo ao TeusHUB-Games" FontSize="26" FontAttributes="Bold" />
-            <Label Text="Aqui você pode explorar veículos do GTA V, skins do Fortnite e armas do CS2. Todos os jogos são ligados pela API RAWG."
-                   TextColor="Gray" />
+                <Label Text="Escolha um jogo" FontAttributes="Bold" Margin="0,8,0,0" />
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Games}" Spacing="8">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource Card}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnGameCardTapped" />
+                                </Border.GestureRecognizers>
+                                <Grid ColumnDefinitions="56,*" ColumnSpacing="12">
+                                    <Label Text="{Binding Game.Emoji}" FontSize="36"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                        <Label Text="{Binding Game.DisplayName}" FontSize="18" FontAttributes="Bold" />
+                                        <Label Text="{Binding Game.Description}" FontSize="12" TextColor="Gray" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
 
-            <Label Text="Escolha um jogo" FontAttributes="Bold" Margin="0,8,0,0" />
-            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Games}" Spacing="8">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <Border Style="{StaticResource Card}">
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding OpenCommand}" />
-                            </Border.GestureRecognizers>
-                            <Grid ColumnDefinitions="56,*" ColumnSpacing="12">
-                                <Label Text="{Binding Game.Emoji}" FontSize="36"
-                                       HorizontalOptions="Center" VerticalOptions="Center" />
-                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                                    <Label Text="{Binding Game.DisplayName}" FontSize="18" FontAttributes="Bold" />
-                                    <Label Text="{Binding Game.Description}" FontSize="12" TextColor="Gray" />
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
+                <Button Text="{Binding FavoritesCount, StringFormat='⭐ Favoritos ({0})'}"
+                        Clicked="OnOpenFavoritesClicked" />
             </VerticalStackLayout>
+        </ScrollView>
 
-
-            <Button Text="Menu lateral" Command="{Binding OpenFlyoutCommand}" />
-            <Button Text="{Binding FavoritesCount, StringFormat='⭐ Favoritos ({0})'}"
-                    Command="{Binding OpenFavoritesCommand}" />
-        </VerticalStackLayout>
-    </ScrollView>
+        <Button Text="☰"
+                FontSize="22"
+                WidthRequest="40"
+                HeightRequest="40"
+                Padding="0"
+                Margin="16,8,0,0"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                SemanticProperties.Description="Abrir menu lateral"
+                Clicked="OnOpenFlyoutClicked" />
+    </Grid>
 </ContentPage>

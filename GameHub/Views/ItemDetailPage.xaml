@@ -24,9 +24,9 @@
                                      BindableLayout.ItemTemplate="{StaticResource DetailRowTemplate}" />
             </Border>
 
-            <Button Text="{Binding FavoriteButtonText}" Command="{Binding ToggleFavoriteCommand}" />
-            <Button Text="{Binding InfoButtonText}" Command="{Binding OpenGameInfoCommand}" />
-            <Button Text="⬅ Voltar" Command="{Binding BackCommand}" />
+            <Button Text="{Binding FavoriteButtonText}" Clicked="OnToggleFavoriteClicked" />
+            <Button Text="{Binding InfoButtonText}" Clicked="OnOpenGameInfoClicked" />
+            <Button Text="⬅ Voltar" Clicked="OnBackClicked" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

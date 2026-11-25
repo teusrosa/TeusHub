@@ -5,7 +5,7 @@ public static class AppConfig
     public static readonly string RawgApiKey = "ba81736e6a7b43e1b9be9b1e4d3d5be0";
 
     public static bool HasRawgKey =>
-        !string.IsNullOrWhiteSpace(RawgApiKey) && RawgApiKey != "ba81736e6a7b43e1b9be9b1e4d3d5be0";
+    !string.IsNullOrWhiteSpace(RawgApiKey);
 }
 
 public static class Routes

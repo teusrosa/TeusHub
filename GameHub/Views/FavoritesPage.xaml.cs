@@ -17,9 +17,14 @@ public partial class FavoritesPage : ContentPage
     private void OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is ItemJogo item)
-            _viewModel.OpenItemCommand.Execute(item);
+            _ = _viewModel.OpenItemAsync(item);
 
         if (sender is CollectionView list)
             list.SelectedItem = null;
+    }
+
+    private void OnClearClicked(object? sender, EventArgs e)
+    {
+        _viewModel.Clear();
     }
 }

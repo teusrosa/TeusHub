@@ -22,9 +22,9 @@
                     <Label Text="{Binding Info.Description}" MaxLines="12" LineBreakMode="TailTruncation" />
                 </VerticalStackLayout>
 
-                <Button Text="{Binding CatalogButtonText}" Command="{Binding OpenCatalogCommand}" />
-                <Button Text="🏠 Ir para o Início (menu lateral)" Command="{Binding OpenHomeCommand}" />
-                <Button Text="⬅ Voltar (pilha)" Command="{Binding BackCommand}" />
+                <Button Text="{Binding CatalogButtonText}" Clicked="OnOpenCatalogClicked" />
+                <Button Text="🏠 Ir para o Início (menu lateral)" Clicked="OnOpenHomeClicked" />
+                <Button Text="⬅ Voltar (pilha)" Clicked="OnBackClicked" />
             </VerticalStackLayout>
         </ScrollView>
 

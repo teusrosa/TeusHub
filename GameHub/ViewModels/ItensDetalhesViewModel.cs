@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using GameHub.Models;
 using GameHub.Services;
 
@@ -17,12 +16,6 @@ public class ItensDetalhesViewModel : ModeloBaseViewModel, IQueryAttributable
         _favorites = favorites;
         _nav = nav;
 
-        ToggleFavoriteCommand = new Command(ToggleFavorite);
-        OpenGameInfoCommand = new Command(async () =>
-        {
-            if (Item is not null) await _nav.GoToGameInfoAsync(Item.Game);
-        });
-        BackCommand = new Command(async () => await _nav.GoBackAsync());
     }
 
     public ItemJogo? Item
@@ -41,10 +34,6 @@ public class ItensDetalhesViewModel : ModeloBaseViewModel, IQueryAttributable
 
     public string InfoButtonText => Item is null ? "🎮 Sobre o jogo" : $"🎮 Sobre {Item.Game.DisplayName} (RAWG)";
 
-    public ICommand ToggleFavoriteCommand { get; }
-    public ICommand OpenGameInfoCommand { get; }
-    public ICommand BackCommand { get; }
-
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         if (query.TryGetValue("Item", out var value) && value is ItemJogo item)
@@ -60,12 +49,18 @@ public class ItensDetalhesViewModel : ModeloBaseViewModel, IQueryAttributable
         }
     }
 
-    private void ToggleFavorite()
+    public void ToggleFavorite()
     {
         if (Item is null) return;
         _favorites.Toggle(Item);
         UpdateFavoriteText();
     }
+
+    public Task OpenGameInfoAsync() => Item is null
+        ? Task.CompletedTask
+        : _nav.GoToGameInfoAsync(Item.Game);
+
+    public Task GoBackAsync() => _nav.GoBackAsync();
 
     private void UpdateFavoriteText() =>
         FavoriteButtonText = Item is not null && _favorites.IsFavorite(Item) ? "★ Remover dos favoritos" : "☆ Favoritar";

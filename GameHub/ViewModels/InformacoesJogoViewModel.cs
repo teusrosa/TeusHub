@@ -1,4 +1,3 @@
-using System.Windows.Input;
 using GameHub.Models;
 using GameHub.Services;
 
@@ -17,12 +16,6 @@ public class InformacoesJogoViewModel : ModeloBaseViewModel, IQueryAttributable
         _service = service;
         _nav = nav;
 
-        OpenCatalogCommand = new Command(async () =>
-        {
-            if (Game is not null) await _nav.GoToGameTabAsync(Game); // troca a aba do RODAPÉ
-        });
-        BackCommand = new Command(async () => await _nav.GoBackAsync());
-        OpenHomeCommand = new Command(async () => await _nav.GoToHomeAsync()); // MENU LATERAL
     }
 
     public DefinicaoJogo? Game
@@ -44,9 +37,13 @@ public class InformacoesJogoViewModel : ModeloBaseViewModel, IQueryAttributable
     public bool HasInfo => Info is not null;
     public string CatalogButtonText => Game is null ? "Ver catálogo" : $"{Game.Emoji} Ver catálogo de {Game.DisplayName}";
 
-    public ICommand OpenCatalogCommand { get; }
-    public ICommand BackCommand { get; }
-    public ICommand OpenHomeCommand { get; }
+    public Task OpenCatalogAsync() => Game is null
+        ? Task.CompletedTask
+        : _nav.GoToGameTabAsync(Game);
+
+    public Task GoBackAsync() => _nav.GoBackAsync();
+
+    public Task OpenHomeAsync() => _nav.GoToHomeAsync();
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
