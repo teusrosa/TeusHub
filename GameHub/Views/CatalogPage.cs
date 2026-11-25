@@ -4,9 +4,9 @@ namespace GameHub.Views;
 
 public abstract class CatalogPage : ContentPage
 {
-    private readonly CatalogViewModel _viewModel;
+    private readonly CatalogoViewModel _viewModel;
 
-    protected CatalogPage(CatalogViewModel viewModel)
+    protected CatalogPage(CatalogoViewModel viewModel)
     {
         _viewModel = viewModel;
         BindingContext = viewModel;

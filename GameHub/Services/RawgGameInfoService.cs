@@ -7,9 +7,9 @@ namespace GameHub.Services;
 public class RawgGameInfoService : IGameInfoService
 {
     private static readonly HttpClient Http = new() { Timeout = TimeSpan.FromSeconds(30) };
-    private readonly Dictionary<string, GameInfo> _cache = new();
+    private readonly Dictionary<string, InformacoesJogo> _cache = new();
 
-    public async Task<GameInfo?> GetAsync(GameDefinition game, CancellationToken ct = default)
+    public async Task<InformacoesJogo?> GetAsync(DefinicaoJogo game, CancellationToken ct = default)
     {
         if (!AppConfig.HasRawgKey)
             throw new InvalidOperationException(
@@ -28,7 +28,7 @@ public class RawgGameInfoService : IGameInfoService
         var d = await Http.GetFromJsonAsync<RawgGame>($"https://api.rawg.io/api/games/{id}?key={key}", ct);
         if (d is null) return null;
 
-        var info = new GameInfo
+        var info = new InformacoesJogo
         {
             Name = d.Name ?? game.DisplayName,
             Released = d.Released,

@@ -5,14 +5,14 @@ using GameHub.Services;
 namespace GameHub.ViewModels;
 
 //aba do jogo escolhidp
-public class GameInfoViewModel : BaseViewModel, IQueryAttributable
+public class InformacoesJogoViewModel : ModeloBaseViewModel, IQueryAttributable
 {
     private readonly IGameInfoService _service;
     private readonly INavigationService _nav;
-    private GameDefinition? _game;
-    private GameInfo? _info;
+    private DefinicaoJogo? _game;
+    private InformacoesJogo? _info;
 
-    public GameInfoViewModel(IGameInfoService service, INavigationService nav)
+    public InformacoesJogoViewModel(IGameInfoService service, INavigationService nav)
     {
         _service = service;
         _nav = nav;
@@ -25,13 +25,13 @@ public class GameInfoViewModel : BaseViewModel, IQueryAttributable
         OpenHomeCommand = new Command(async () => await _nav.GoToHomeAsync()); // MENU LATERAL
     }
 
-    public GameDefinition? Game
+    public DefinicaoJogo? Game
     {
         get => _game;
         private set => SetProperty(ref _game, value);
     }
 
-    public GameInfo? Info
+    public InformacoesJogo? Info
     {
         get => _info;
         private set
@@ -50,7 +50,7 @@ public class GameInfoViewModel : BaseViewModel, IQueryAttributable
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (query.TryGetValue("Game", out var value) && value is GameDefinition game)
+        if (query.TryGetValue("Game", out var value) && value is DefinicaoJogo game)
         {
             Game = game;
             Title = game.DisplayName;

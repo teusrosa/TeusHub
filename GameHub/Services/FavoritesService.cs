@@ -9,13 +9,13 @@ public class FavoritesService
 {
     private const string PrefKey = "favorites_v1";
 
-    public ObservableCollection<GameItem> Items { get; } = new();
+    public ObservableCollection<ItemJogo> Items { get; } = new();
 
     public FavoritesService() => Load();
 
-    public bool IsFavorite(GameItem item) => Items.Any(i => i.FavoriteKey == item.FavoriteKey);
+    public bool IsFavorite(ItemJogo item) => Items.Any(i => i.FavoriteKey == item.FavoriteKey);
 
-    public bool Toggle(GameItem item)
+    public bool Toggle(ItemJogo item)
     {
         var existing = Items.FirstOrDefault(i => i.FavoriteKey == item.FavoriteKey);
         bool added;
@@ -26,7 +26,7 @@ public class FavoritesService
         }
         else
         {
-            Items.Add(new FavoriteItem(item));
+            Items.Add(new ItemFavorito(item));
             added = true;
         }
 
@@ -44,7 +44,7 @@ public class FavoritesService
     {
         try
         {
-            var records = Items.Select(i => i as FavoriteItem ?? new FavoriteItem(i)).Select(f => f.ToRecord()).ToList();
+            var records = Items.Select(i => i as ItemFavorito ?? new ItemFavorito(i)).Select(f => f.ToRecord()).ToList();
             Preferences.Default.Set(PrefKey, JsonSerializer.Serialize(records));
         }
         catch { }
@@ -57,9 +57,9 @@ public class FavoritesService
             var json = Preferences.Default.Get(PrefKey, "");
             if (string.IsNullOrWhiteSpace(json)) return;
 
-            var records = JsonSerializer.Deserialize<List<FavoriteRecord>>(json) ?? new();
+            var records = JsonSerializer.Deserialize<List<RegistroFavorito>>(json) ?? new();
             foreach (var r in records)
-                Items.Add(new FavoriteItem(r));
+                Items.Add(new ItemFavorito(r));
         }
         catch { }
     }

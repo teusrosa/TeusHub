@@ -14,9 +14,9 @@ public class FortniteCatalogService : CatalogServiceBase
 {
     private const string DefaultTerm = "skull";
 
-    public override GameDefinition Game => GameDefinitions.Fortnite;
+    public override DefinicaoJogo Game => DefinicoesJogos.Fortnite;
 
-    public override async Task<IReadOnlyList<GameItem>> GetItemsAsync(string? search, CancellationToken ct = default)
+    public override async Task<IReadOnlyList<ItemJogo>> GetItemsAsync(string? search, CancellationToken ct = default)
     {
         var term = string.IsNullOrWhiteSpace(search) ? DefaultTerm : search.Trim();
         var url = "https://fortnite-api.com/v2/cosmetics/br/search/all" +
@@ -24,11 +24,11 @@ public class FortniteCatalogService : CatalogServiceBase
 
         using var resp = await Http.GetAsync(url, ct);
         if (resp.StatusCode == HttpStatusCode.NotFound)
-            return Array.Empty<GameItem>();
+            return Array.Empty<ItemJogo>();
 
         resp.EnsureSuccessStatusCode();
-        var body = await resp.Content.ReadFromJsonAsync<ApiResponse<List<CosmeticItem>>>(JsonOptions, ct);
+        var body = await resp.Content.ReadFromJsonAsync<ApiResponse<List<ItemCosmetico>>>(JsonOptions, ct);
 
-        return (body?.Data ?? new List<CosmeticItem>()).Take(100).Cast<GameItem>().ToList();
+        return (body?.Data ?? new List<ItemCosmetico>()).Take(100).Cast<ItemJogo>().ToList();
     }
 }

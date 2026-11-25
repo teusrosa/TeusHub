@@ -9,8 +9,8 @@ public abstract class CatalogServiceBase : ICatalogService
     protected static readonly HttpClient Http = CreateHttp();
     protected static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web);
 
-    public abstract GameDefinition Game { get; }
-    public abstract Task<IReadOnlyList<GameItem>> GetItemsAsync(string? search, CancellationToken ct = default);
+    public abstract DefinicaoJogo Game { get; }
+    public abstract Task<IReadOnlyList<ItemJogo>> GetItemsAsync(string? search, CancellationToken ct = default);
 
     private static HttpClient CreateHttp()
     {
@@ -48,7 +48,7 @@ public abstract class CatalogServiceBase : ICatalogService
     }
 }
 
-public abstract class CachedFileCatalogService<T> : CatalogServiceBase where T : GameItem
+public abstract class CachedFileCatalogService<T> : CatalogServiceBase where T : ItemJogo
 {
     private List<T>? _all;
 
@@ -58,7 +58,7 @@ public abstract class CachedFileCatalogService<T> : CatalogServiceBase where T :
     protected virtual int MaxResults => int.MaxValue;
     protected virtual IEnumerable<T> Order(IEnumerable<T> items) => items;
 
-    public override async Task<IReadOnlyList<GameItem>> GetItemsAsync(string? search, CancellationToken ct = default)
+    public override async Task<IReadOnlyList<ItemJogo>> GetItemsAsync(string? search, CancellationToken ct = default)
     {
         _all ??= await GetListCachedAsync<T>(Url, CacheFileName, ct);
 
@@ -69,6 +69,6 @@ public abstract class CachedFileCatalogService<T> : CatalogServiceBase where T :
             query = query.Where(i => Matches(i, term));
         }
 
-        return Order(query).Take(MaxResults).Cast<GameItem>().ToList();
+        return Order(query).Take(MaxResults).Cast<ItemJogo>().ToList();
     }
 }

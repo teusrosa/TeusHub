@@ -5,9 +5,9 @@ namespace GameHub.Views;
 
 public partial class FavoritesPage : ContentPage
 {
-    private readonly FavoritesViewModel _viewModel;
+    private readonly FavoritosViewModel _viewModel;
 
-    public FavoritesPage(FavoritesViewModel viewModel)
+    public FavoritesPage(FavoritosViewModel viewModel)
     {
         InitializeComponent();
         _viewModel = viewModel;
@@ -16,7 +16,7 @@ public partial class FavoritesPage : ContentPage
 
     private void OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        if (e.CurrentSelection.FirstOrDefault() is GameItem item)
+        if (e.CurrentSelection.FirstOrDefault() is ItemJogo item)
             _viewModel.OpenItemCommand.Execute(item);
 
         if (sender is CollectionView list)

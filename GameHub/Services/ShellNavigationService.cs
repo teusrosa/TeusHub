@@ -5,16 +5,16 @@ namespace GameHub.Services;
 public class ShellNavigationService : INavigationService
 {
     // pilha
-    public Task GoToItemDetailAsync(GameItem item) =>
+    public Task GoToItemDetailAsync(ItemJogo item) =>
         Shell.Current.GoToAsync(Routes.ItemDetail, new ShellNavigationQueryParameters { { "Item", item } });
 
-    public Task GoToGameInfoAsync(GameDefinition game) =>
+    public Task GoToGameInfoAsync(DefinicaoJogo game) =>
         Shell.Current.GoToAsync(Routes.GameInfo, new ShellNavigationQueryParameters { { "Game", game } });
 
     public Task GoBackAsync() => Shell.Current.GoToAsync("..");
 
     // rodape
-    public Task GoToGameTabAsync(GameDefinition game) =>
+    public Task GoToGameTabAsync(DefinicaoJogo game) =>
         Shell.Current.GoToAsync($"//{Routes.Games}/{game.Route}");
 
     public Task GoToFavoritesAsync() =>

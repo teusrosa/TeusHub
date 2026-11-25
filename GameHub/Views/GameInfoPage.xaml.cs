@@ -4,7 +4,7 @@ namespace GameHub.Views;
 
 public partial class GameInfoPage : ContentPage
 {
-    public GameInfoPage(GameInfoViewModel viewModel)
+    public GameInfoPage(InformacoesJogoViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;

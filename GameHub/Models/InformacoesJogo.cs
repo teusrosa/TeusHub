@@ -1,6 +1,6 @@
 namespace GameHub.Models;
 //usada info do jogo, tipo jogo/nota
-public class GameInfo
+public class InformacoesJogo
 {
     public string Name { get; init; } = "";
     public string? Released { get; init; }
@@ -15,7 +15,7 @@ public class GameInfo
     public List<string> Publishers { get; init; } = new();
     public List<string> Platforms { get; init; } = new();
 
-    public IReadOnlyList<DetailRow> Rows => new List<DetailRow>
+    public IReadOnlyList<LinhaDetalhe> Rows => new List<LinhaDetalhe>
     {
         new("Lançamento", Released ?? "—"),
         new("Nota dos jogadores", Rating > 0 ? $"{Rating:0.0} / 5" : "—"),

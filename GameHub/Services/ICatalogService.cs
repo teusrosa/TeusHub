@@ -4,22 +4,22 @@ namespace GameHub.Services;
 
 public interface ICatalogService
 {
-    GameDefinition Game { get; }
-    Task<IReadOnlyList<GameItem>> GetItemsAsync(string? search, CancellationToken ct = default);
+    DefinicaoJogo Game { get; }
+    Task<IReadOnlyList<ItemJogo>> GetItemsAsync(string? search, CancellationToken ct = default);
 }
 
 public interface IGameInfoService
 {
-    Task<GameInfo?> GetAsync(GameDefinition game, CancellationToken ct = default);
+    Task<InformacoesJogo?> GetAsync(DefinicaoJogo game, CancellationToken ct = default);
 }
 
 public interface INavigationService
 {
-    Task GoToItemDetailAsync(GameItem item);
-    Task GoToGameInfoAsync(GameDefinition game);
+    Task GoToItemDetailAsync(ItemJogo item);
+    Task GoToGameInfoAsync(DefinicaoJogo game);
     Task GoBackAsync();
 
-    Task GoToGameTabAsync(GameDefinition game);
+    Task GoToGameTabAsync(DefinicaoJogo game);
     Task GoToFavoritesAsync();
 
     Task GoToHomeAsync();

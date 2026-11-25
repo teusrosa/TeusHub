@@ -6,16 +6,16 @@ using GameHub.Services;
 
 namespace GameHub.ViewModels;
 //ver favoritos
-public class FavoritesViewModel : BaseViewModel
+public class FavoritosViewModel : ModeloBaseViewModel
 {
     private readonly FavoritesService _favorites;
 
-    public FavoritesViewModel(FavoritesService favorites, INavigationService nav)
+    public FavoritosViewModel(FavoritesService favorites, INavigationService nav)
     {
         _favorites = favorites;
         Title = "Favoritos";
 
-        OpenItemCommand = new Command<GameItem>(async item =>
+        OpenItemCommand = new Command<ItemJogo>(async item =>
         {
             if (item is not null) await nav.GoToItemDetailAsync(item); // PILHA
         });
@@ -24,7 +24,7 @@ public class FavoritesViewModel : BaseViewModel
         _favorites.Items.CollectionChanged += OnChanged;
     }
 
-    public ObservableCollection<GameItem> Items => _favorites.Items;
+    public ObservableCollection<ItemJogo> Items => _favorites.Items;
     public bool IsEmpty => Items.Count == 0;
     public bool HasItems => Items.Count > 0;
 

@@ -5,32 +5,32 @@ using GameHub.Services;
 
 namespace GameHub.ViewModels;
 
-public abstract class CatalogViewModel : BaseViewModel
+public abstract class CatalogoViewModel : ModeloBaseViewModel
 {
     private readonly ICatalogService _service;
     private readonly INavigationService _nav;
     private bool _loaded;
     private string _searchText = "";
-    private ObservableCollection<GameItem> _items = new();
+    private ObservableCollection<ItemJogo> _items = new();
 
-    protected CatalogViewModel(ICatalogService service, INavigationService nav)
+    protected CatalogoViewModel(ICatalogService service, INavigationService nav)
     {
         _service = service;
         _nav = nav;
         Title = service.Game.DisplayName;
 
         SearchCommand = new Command(async () => await LoadAsync());
-        OpenItemCommand = new Command<GameItem>(async item =>
+        OpenItemCommand = new Command<ItemJogo>(async item =>
         {
             if (item is not null) await _nav.GoToItemDetailAsync(item);
         });
         BackCommand = new Command(async () => await _nav.GoToHomeAsync());
     }
 
-    public GameDefinition Game => _service.Game;
+    public DefinicaoJogo Game => _service.Game;
     public virtual string SearchPlaceholder => $"Buscar em {Game.DisplayName}...";
 
-    public ObservableCollection<GameItem> Items
+    public ObservableCollection<ItemJogo> Items
     {
         get => _items;
         private set => SetProperty(ref _items, value);
@@ -60,7 +60,7 @@ public abstract class CatalogViewModel : BaseViewModel
             IsBusy = true;
             ErrorMessage = null;
             var result = await _service.GetItemsAsync(SearchText);
-            Items = new ObservableCollection<GameItem>(result);
+            Items = new ObservableCollection<ItemJogo>(result);
             _loaded = true;
         }
         catch (Exception ex)
@@ -74,19 +74,19 @@ public abstract class CatalogViewModel : BaseViewModel
     }
 }
 
-public class GtaViewModel : CatalogViewModel
+public class GtaViewModel : CatalogoViewModel
 {
     public GtaViewModel(GtaCatalogService service, INavigationService nav) : base(service, nav) { }
     public override string SearchPlaceholder => "Buscar veículo, fabricante ou classe...";
 }
 
-public class FortniteViewModel : CatalogViewModel
+public class FortniteViewModel : CatalogoViewModel
 {
     public FortniteViewModel(FortniteCatalogService service, INavigationService nav) : base(service, nav) { }
     public override string SearchPlaceholder => "Buscar skin ou cosmético (ex.: ninja)...";
 }
 
-public class Cs2ViewModel : CatalogViewModel
+public class Cs2ViewModel : CatalogoViewModel
 {
     public Cs2ViewModel(Cs2CatalogService service, INavigationService nav) : base(service, nav) { }
     public override string SearchPlaceholder => "Buscar arma ou skin (ex.: AK-47)...";

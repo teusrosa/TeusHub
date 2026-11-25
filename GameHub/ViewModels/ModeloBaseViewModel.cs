@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace GameHub.ViewModels;
 
-public abstract class BaseViewModel : INotifyPropertyChanged
+public abstract class ModeloBaseViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 

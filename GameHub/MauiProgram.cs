@@ -21,13 +21,13 @@ public static class MauiProgram
         builder.Services.AddSingleton<Cs2CatalogService>();
 
         // ViewModels
-        builder.Services.AddTransient<HomeViewModel>();
+        builder.Services.AddTransient<InicioViewModel>();
         builder.Services.AddTransient<GtaViewModel>();
         builder.Services.AddTransient<FortniteViewModel>();
         builder.Services.AddTransient<Cs2ViewModel>();
-        builder.Services.AddTransient<FavoritesViewModel>();
-        builder.Services.AddTransient<ItemDetailViewModel>();
-        builder.Services.AddTransient<GameInfoViewModel>();
+        builder.Services.AddTransient<FavoritosViewModel>();
+        builder.Services.AddTransient<ItensDetalhesViewModel>();
+        builder.Services.AddTransient<InformacoesJogoViewModel>();
 
         // Páginas
         builder.Services.AddTransient<HomePage>();

@@ -4,7 +4,7 @@ namespace GameHub.Views;
 
 public partial class HomePage : ContentPage
 {
-    public HomePage(HomeViewModel viewModel)
+    public HomePage(InicioViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;

@@ -12,7 +12,7 @@ public partial class CatalogView : ContentView
 
     private void OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        if (e.CurrentSelection.FirstOrDefault() is GameItem item && BindingContext is CatalogViewModel vm)
+        if (e.CurrentSelection.FirstOrDefault() is ItemJogo item && BindingContext is CatalogoViewModel vm)
             vm.OpenItemCommand.Execute(item);
 
         if (sender is CollectionView list)

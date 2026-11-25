@@ -8,26 +8,26 @@ namespace GameHub.ViewModels;
 //aqui vai abrir uma aba do jogo escolhido
 public class GameCard
 {
-    public GameCard(GameDefinition game, ICommand openCommand)
+    public GameCard(DefinicaoJogo game, ICommand openCommand)
     {
         Game = game;
         OpenCommand = openCommand;
     }
 
-    public GameDefinition Game { get; }
+    public DefinicaoJogo Game { get; }
     public ICommand OpenCommand { get; }
 }
 
-public class HomeViewModel : BaseViewModel
+public class InicioViewModel : ModeloBaseViewModel
 {
     private readonly FavoritesService _favorites;
 
-    public HomeViewModel(INavigationService nav, FavoritesService favorites)
+    public InicioViewModel(INavigationService nav, FavoritesService favorites)
     {
         _favorites = favorites;
         Title = "GameHub";
 
-        Games = GameDefinitions.All
+        Games = DefinicoesJogos.All
             .Select(g => new GameCard(g, new Command(async () => await nav.GoToGameTabAsync(g)))) // RODAPÉ
             .ToList();
 

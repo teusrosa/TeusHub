@@ -5,14 +5,14 @@ using GameHub.Services;
 
 namespace GameHub.ViewModels;
 //detalhes do item escolhido
-public class ItemDetailViewModel : BaseViewModel, IQueryAttributable
+public class ItensDetalhesViewModel : ModeloBaseViewModel, IQueryAttributable
 {
     private readonly FavoritesService _favorites;
     private readonly INavigationService _nav;
-    private GameItem? _item;
+    private ItemJogo? _item;
     private string _favoriteButtonText = "☆ Favoritar";
 
-    public ItemDetailViewModel(FavoritesService favorites, INavigationService nav)
+    public ItensDetalhesViewModel(FavoritesService favorites, INavigationService nav)
     {
         _favorites = favorites;
         _nav = nav;
@@ -25,13 +25,13 @@ public class ItemDetailViewModel : BaseViewModel, IQueryAttributable
         BackCommand = new Command(async () => await _nav.GoBackAsync());
     }
 
-    public GameItem? Item
+    public ItemJogo? Item
     {
         get => _item;
         private set => SetProperty(ref _item, value);
     }
 
-    public ObservableCollection<DetailRow> Details { get; } = new();
+    public ObservableCollection<LinhaDetalhe> Details { get; } = new();
 
     public string FavoriteButtonText
     {
@@ -47,7 +47,7 @@ public class ItemDetailViewModel : BaseViewModel, IQueryAttributable
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (query.TryGetValue("Item", out var value) && value is GameItem item)
+        if (query.TryGetValue("Item", out var value) && value is ItemJogo item)
         {
             Item = item;
             Title = item.Title;
